@@ -75,17 +75,25 @@ export default class MyComponent {
 
 The second `spec` parameter must be a plain object implementing the drag source specification. Below is the list of all methods that it may have.
 
-`spec`的第二个参数
+`spec`的第二个参数必须是一个实现了drag source 规范的js对象，下面是这个js对象拥有的一些方法。
 
 #### Specification Methods
 
 * **`beginDrag(props, monitor, component)`**: Required. When the dragging starts, `beginDrag` is called. You must return a plain JavaScript object describing the data being dragged. What you return is the *only* information available to the drop targets about the drag source so it's important to pick the *minimal* data they need to know. You may be tempted to put a reference to the `component` into it, but you should try very hard to avoid doing this because it couples the drag sources and drop targets. It's a good idea to return something like `{ id: props.id }` from this method.
 
+* **`beginDrag(props, monitor, component)`**: 必须. 当拖拽开始的时候, `beginDrag` 被调用. 这里需要说明的是，在这个函数里，你必须返回一个js对象，这个对象用于描述那些被拖拽的数据。这个函数返回的信息是drop targets所能得到的唯一信息，所以，抽象处drop targets 需要的信息是非常重要的。你可能想放一个组件的饮用在里面。但是吧，建议你尽可能的避免这样做。因为这个函数的设计是为了是把drag sources 和 drop targets联系在一起的。一个好的建议是，从这个函数中你返回像`{ id: props.id }` 这样的对象。
+
 * **`endDrag(props, monitor, component)`**: Optional. When the dragging stops, `endDrag` is called. For every `beginDrag` call, a corresponding `endDrag` call is guaranteed. You may call `monitor.didDrop()` to check whether or not the drop was handled by a compatible drop target. If it was handled, and the drop target specified a *drop result* by returning a plain object from its `drop()` method, it will be available as `monitor.getDropResult()`. This method is a good place to fire a Flux action. *Note: If the component is unmounted while dragging, `component` parameter is set to be `null`.*
+
+* **`endDrag(props, monitor, component)`**: 可选。当拖拽停止，`endDrag`被调用，对于每次的`beginDrag`调用，都有一个对应的`endDrag`在将来调用。你可以调用`monitor.didDrop()` 来检查drop target
 
 * **`canDrag(props, monitor)`**: Optional. Use it to specify whether the dragging is currently allowed. If you want to always allow it, just omit this method. Specifying it is handy if you'd like to disable dragging based on some predicate over `props`. *Note: You may not call `monitor.canDrag()` inside this method.*
 
+* **`canDrag(props, monitor)`**: 可选。用此函数来制定当前拖拽是否被允许。如果你想让其一直可拖拽，可以忽略此函数。如果你想基于`props`动态计算是否禁用拖拽，你可以操作这个函数。*注意: 你 不要在这个方法中调用`monitor.canDrag()`*
+
 * **`isDragging(props, monitor)`**: Optional. By default, only the drag source that initiated the drag operation is considered to be dragging. You can override this behavior by defining a custom `isDragging` method. It might return something like `props.id === monitor.getItem().id`. Do this if the original component may be unmounted during the dragging and later “resurrected” with a different parent. For example, when moving a card across the lists in a Kanban board, you want it to retain the dragged appearance—even though technically, the component gets unmounted and a different one gets mounted every time you move it to another list. *Note: You may not call `monitor.isDragging()` inside this method.*
+
+* **`isDragging(props, monitor)`**: 可选，默认情况下，只有drag source 
 
 #### Specification Method Parameters
 
