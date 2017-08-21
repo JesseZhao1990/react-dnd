@@ -1,15 +1,24 @@
 *New to React DnD? [Read the overview](docs-overview.html) before jumping into the docs.*
 
+*如果你是初次接触React DnD? 在进入这个文档之前，[请先阅读概述](docs-overview.html)*
+
 DragSource
 ===================
 
 Wrap your component with `DragSource` to make it draggable. `DragSource` is a higher-order component accepting three required parameters. They are described in detail below.
 
+用`DragSource`包裹你的组件组件变的可拖拽，`DragSource`是一个接受三个必传参数的高阶组件，下面是详细的介绍
+
 To use `DragSource`, don't forget to wrap the top-level component of your app in a [`DragDropContext`](docs-drag-drop-context.html).
+
+在使用`DragSource`之前，不要忘记用[`DragDropContext`](docs-drag-drop-context.html)包裹你的项目的组件
 
 ### Signature
 
 `DragSource` uses partial application. After specifying its parameters with the first call, you need to pass your React component class as the only parameter in the second call. This signature makes `DragSource` usable as an ES7 decorator. Read the [overview](docs-overview.html) for a more detailed explanation of the decorators and the higher-order components.
+
+`DragSource`用在web程序的局部，正如下面的例子一样，当第一次调用之后，接下来你需要把你的组件传进去。这里使用了ES7的修饰符，你可以通过读[这个文档](docs-overview.html)来详细的了解修饰符和高阶组件
+
 
 -------------------
 ```js
@@ -48,9 +57,15 @@ export default class MyComponent {
 
 * **`type`**: Required. Either a string, an ES6 symbol, or a function that returns either given the component's `props`. Only the [drop targets](docs-drop-target.html) registered for the same type will react to the items produced by this drag source. Read the [overview](docs-overview.html) to learn more about the items and types.
 
+* **`type`**: 必需. 可以是一个字符串，也可以是ES6的 symbol，或者是一个返回字符串或者symbol的函数。这个type会传递给组件的props。 Only the [drop targets](docs-drop-target.html) registered for the same type will react to the items produced by this drag source. 请阅读[概览](docs-overview.html) 来详细了解items和types
+
 * **`spec`**: Required. A plain JavaScript object with a few allowed methods on it. It describes how the drag source reacts to the drag and drop events. See the drag source specification described in detail in the next section.
 
+* **`spec`**: 必须. 一个js对象，其上携带了几个获准的函数。它描述了拖拽源是如何响应拖拽事件的。详细的关于拖拽源的描述在下一章节有介绍。
+
 * **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `connect` and `monitor`. Read the [overview](docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
+
+* **`collect`**: 必须. 一个收集函数.它会返回一个用于注入到你组件的props的js对象，它接受两个参数 It should return a plain object of the props to inject into your component. It receives two parameters: `connect` and `monitor`. Read the [overview](docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
