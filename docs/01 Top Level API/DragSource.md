@@ -65,9 +65,11 @@ export default class MyComponent {
 
 * **`collect`**: Required. The collecting function. It should return a plain object of the props to inject into your component. It receives two parameters: `connect` and `monitor`. Read the [overview](docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
 
-* **`collect`**: 必须. 一个收集函数.它会返回一个用于注入到你组件的props的js对象，它接受两个参数 It should return a plain object of the props to inject into your component. It receives two parameters: `connect` and `monitor`. Read the [overview](docs-overview.html) for an introduction to the monitors, the connectors, and the collecting function. See the collecting function described in detail after the next section.
+* **`collect`**: 必须. 一个收集函数.它会返回一个用于注入到你组件的props的js对象，它接受两个参数， `connect` 和 `monitor`， 阅读[概览](docs-overview.html)了解moniters，connectors和collecting函数，详细的collecting函数的介绍在下一节。
 
 * **`options`**: Optional. A plain object. If some of the props to your component are not scalar (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
+
+* **`options`**: 可选. 一个对象. 如果你组件的props有一些是不可衡量的。 (that is, are not primitive values or functions), specifying a custom `arePropsEqual(props, otherProps)` function inside the `options` object can improve the performance. Unless you have performance problems, don't worry about it.
 
 ### Drag Source Specification
 
